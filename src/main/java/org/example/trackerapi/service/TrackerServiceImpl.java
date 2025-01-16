@@ -32,4 +32,9 @@ public class TrackerServiceImpl implements TrackerService{
     public List<Tracker> getTrackers() {
         return trackerRepository.findByAnimalIdNot(0);
     }
+
+    @Override
+    public void deleteTracker(long trackerId) {
+        trackerRepository.deleteById(trackerId);
+    }
 }

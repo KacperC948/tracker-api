@@ -9,4 +9,5 @@ public interface TrackerService {
     Tracker getTrackerById(long trackerId);
     Tracker getTrackerByAnimalId(long animalId);
     List<Tracker> getTrackers();
+    void deleteTracker(long trackerId);
 }

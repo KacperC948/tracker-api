@@ -26,12 +26,11 @@ public class AnimalShepherServiceImpl implements AnimalShepherdService{
     }
 
     @Override
-    public List<AnimalShepherd> saveAll(List<AnimalShepherd> animalShepherds) {
+    public void saveAll(List<AnimalShepherd> animalShepherds) {
         List<AnimalShepherd> result = new ArrayList<AnimalShepherd>();
         for (AnimalShepherd entity : animalShepherds) {
             result.add(save(entity));
         }
-        return result;
     }
 
     @Override

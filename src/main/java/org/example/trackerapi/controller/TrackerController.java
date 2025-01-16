@@ -35,4 +35,27 @@ public class TrackerController {
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(trackerService.getTrackers());
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> update(
+            @PathVariable long id,
+            @RequestBody TrackerDto trackerDto
+    ) {
+        Tracker tracker = Tracker.builder()
+                .id(id)
+                .animalId(trackerDto.getAnimalId())
+                .name(trackerDto.getName())
+                .build();
+
+        trackerService.addTracker(tracker);
+        return ResponseEntity.ok("Tracker updated successfully");
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(
+            @PathVariable long id
+    ) {
+        trackerService.deleteTracker(id);
+        return ResponseEntity.ok("Tracker deleted successfully");
+    }
 }
