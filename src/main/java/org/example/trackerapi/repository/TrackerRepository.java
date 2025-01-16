@@ -8,5 +8,6 @@ import java.util.List;
 public interface TrackerRepository extends JpaRepository<Tracker, Long> {
     Tracker findTrackerById(long id);
     Tracker findTrackerByAnimalId(long animalId);
+    List<Tracker> findAllByAnimalId(long animalId);
     List<Tracker> findByAnimalIdNot(long animalId);
 }

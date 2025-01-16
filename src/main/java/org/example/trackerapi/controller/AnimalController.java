@@ -52,6 +52,21 @@ public class AnimalController {
         return ResponseEntity.ok("Animal added successfully");
     }
 
+    @PostMapping("/assignTracker")
+    public ResponseEntity<String> assignTracker(
+            @RequestParam long animalId,
+            @RequestBody TrackerDto trackerDto
+    ) {
+        Animal animal = animalService.getAnimal(animalId);
+        Tracker tracker = Tracker.builder()
+                .animalId(trackerDto.getAnimalId())
+                .name(trackerDto.getName())
+                .build();
+
+        trackerService.addTracker(tracker);
+        return ResponseEntity.ok("Tracker added successfully");
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(
             @PathVariable long id

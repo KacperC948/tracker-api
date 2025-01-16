@@ -29,8 +29,13 @@ public class TrackerServiceImpl implements TrackerService{
     }
 
     @Override
-    public List<Tracker> getTrackers() {
+    public List<Tracker> getTrackersWithAssignedAnimal() {
         return trackerRepository.findByAnimalIdNot(0);
+    }
+
+    @Override
+    public List<Tracker> getTrackersWithoutAssignedAnimal() {
+        return trackerRepository.findAllByAnimalId(0);
     }
 
     @Override

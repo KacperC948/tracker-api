@@ -8,6 +8,7 @@ public interface TrackerService {
     void addTracker(Tracker tracker);
     Tracker getTrackerById(long trackerId);
     Tracker getTrackerByAnimalId(long animalId);
-    List<Tracker> getTrackers();
+    List<Tracker> getTrackersWithAssignedAnimal();
+    List<Tracker> getTrackersWithoutAssignedAnimal();
     void deleteTracker(long trackerId);
 }

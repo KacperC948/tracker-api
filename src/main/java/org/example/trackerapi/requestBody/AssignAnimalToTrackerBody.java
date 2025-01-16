@@ -5,13 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetGeoReadsRequest {
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+public class AssignAnimalToTrackerBody {
+    long animalId;
+    long trackerId;
 }

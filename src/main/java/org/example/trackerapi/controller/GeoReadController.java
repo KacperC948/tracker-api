@@ -6,7 +6,7 @@ import org.example.trackerapi.model.Animal;
 import org.example.trackerapi.model.AnimalShepherd;
 import org.example.trackerapi.model.GeoRead;
 import org.example.trackerapi.model.GeoReadSummary;
-import org.example.trackerapi.requestBody.GetGeoReadsRequest;
+import org.example.trackerapi.requestBody.GetGeoReadsBody;
 import org.example.trackerapi.service.AnimalService;
 import org.example.trackerapi.service.AnimalShepherdService;
 import org.example.trackerapi.service.GeoReadService;
@@ -85,9 +85,9 @@ public class GeoReadController {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<GeoRead>> getAllByDataRange(
-            @RequestBody GetGeoReadsRequest getGeoReadsRequest
+            @RequestBody GetGeoReadsBody getGeoReadsBody
     ) {
-        return ResponseEntity.ok(geoReadService.getByDateRange(getGeoReadsRequest.getStartDate(), getGeoReadsRequest.getEndDate()));
+        return ResponseEntity.ok(geoReadService.getByDateRange(getGeoReadsBody.getStartDate(), getGeoReadsBody.getEndDate()));
     }
 
     @GetMapping("/getAllWarnings")
