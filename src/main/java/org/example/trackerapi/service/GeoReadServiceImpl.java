@@ -30,8 +30,8 @@ public class GeoReadServiceImpl implements GeoReadService {
     }
 
     @Override
-    public List<GeoRead> getByDateRange(String startDate, String endDate) {
-        return geoReadRepository.findByDateRange(LocalDateTime.parse(startDate), LocalDateTime.parse(endDate));
+    public List<GeoRead> getByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
+        return geoReadRepository.findByDateRange(startDate, endDate);
     }
 
     @Override
@@ -44,6 +44,11 @@ public class GeoReadServiceImpl implements GeoReadService {
     @Override
     public List<GeoRead> getAllWarnings() {
         return geoReadRepository.findAllByAnimalInShepherdConfirmedAndTempExceededConfirmed(false, false);
+    }
+
+    @Override
+    public GeoRead findGeoReadById(long id) {
+        return geoReadRepository.findGeoReadById(id);
     }
 
     public double calculateTotalDistance(List<GeoRead> geoReads) {

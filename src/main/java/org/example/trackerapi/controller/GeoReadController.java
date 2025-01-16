@@ -6,7 +6,11 @@ import org.example.trackerapi.model.Animal;
 import org.example.trackerapi.model.AnimalShepherd;
 import org.example.trackerapi.model.GeoRead;
 import org.example.trackerapi.model.GeoReadSummary;
-import org.example.trackerapi.service.*;
+import org.example.trackerapi.requestBody.GetGeoReadsRequest;
+import org.example.trackerapi.service.AnimalService;
+import org.example.trackerapi.service.AnimalShepherdService;
+import org.example.trackerapi.service.GeoReadService;
+import org.example.trackerapi.service.GeoReadSummaryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -81,15 +85,27 @@ public class GeoReadController {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<GeoRead>> getAllByDataRange(
-            @RequestParam String startDate,
-            @RequestParam String endDate
+            @RequestBody GetGeoReadsRequest getGeoReadsRequest
     ) {
-        return ResponseEntity.ok(geoReadService.getByDateRange(startDate, endDate));
+        return ResponseEntity.ok(geoReadService.getByDateRange(getGeoReadsRequest.getStartDate(), getGeoReadsRequest.getEndDate()));
     }
 
     @GetMapping("/getAllWarnings")
     public ResponseEntity<List<GeoRead>> getAllWarnings() {
         return ResponseEntity.ok(geoReadService.getAllWarnings());
+    }
+
+    @PostMapping("/confirm")
+    public ResponseEntity<String> confirm(
+            @RequestBody List<Long> ids
+    ) {
+        for (Long id : ids) {
+            GeoRead geoRead = geoReadService.findGeoReadById(id);
+            geoRead.setTempExceededConfirmed(true);
+            geoRead.setAnimalInShepherdConfirmed(true);
+            geoReadService.save(geoRead);
+        }
+        return ResponseEntity.ok("GeoReads confirmed successfully");
     }
 
     private boolean checkAnimalInShepherd(long animalId, double latitude, double longitude) {
