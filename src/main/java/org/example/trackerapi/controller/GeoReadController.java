@@ -79,6 +79,14 @@ public class GeoReadController {
         return ResponseEntity.ok("GeoRead added successfully");
     }
 
+    @GetMapping("/getAll")
+    public ResponseEntity<List<GeoRead>> getAllByDataRange(
+            @RequestParam String startDate,
+            @RequestParam String endDate
+    ) {
+        return ResponseEntity.ok(geoReadService.getByDateRange(startDate, endDate));
+    }
+
     @GetMapping("/getAllWarnings")
     public ResponseEntity<List<GeoRead>> getAllWarnings() {
         return ResponseEntity.ok(geoReadService.getAllWarnings());
