@@ -19,6 +19,9 @@ public class Tracker {
     @Column(name = "id")
     private long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "animal_id")
     private long animalId;
 }

@@ -15,18 +15,14 @@ public class AnimalServiceImpl implements AnimalService {
     private AnimalRepository animalRepository;
 
     @Override
-    public Animal addAnimal(Animal animal) {
-        return animalRepository.save(animal);
+    public void addAnimal(Animal animal) {
+        animalRepository.save(animal);
     }
 
     @Override
-    public Animal deleteAnimal(long animalId) {
+    public void deleteAnimal(long animalId) {
         Optional<Animal> animal = animalRepository.findById(animalId);
-        if (animal.isPresent()) {
-            animalRepository.delete(animal.get());
-            return animal.get();
-        }
-        return null;
+        animal.ifPresent(value -> animalRepository.delete(value));
     }
 
     @Override

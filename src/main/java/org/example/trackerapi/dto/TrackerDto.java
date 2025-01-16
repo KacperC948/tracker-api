@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class TrackerDto {
 
     private long animalId;
+    private String name;
 }

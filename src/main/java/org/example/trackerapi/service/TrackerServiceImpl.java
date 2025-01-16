@@ -5,6 +5,8 @@ import org.example.trackerapi.repository.TrackerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TrackerServiceImpl implements TrackerService{
 
@@ -12,8 +14,8 @@ public class TrackerServiceImpl implements TrackerService{
     private TrackerRepository trackerRepository;
 
     @Override
-    public Tracker addTracker(Tracker tracker) {
-        return trackerRepository.save(tracker);
+    public void addTracker(Tracker tracker) {
+        trackerRepository.save(tracker);
     }
 
     @Override
@@ -24,5 +26,10 @@ public class TrackerServiceImpl implements TrackerService{
     @Override
     public Tracker getTrackerByAnimalId(long animalId) {
         return trackerRepository.findTrackerByAnimalId(animalId);
+    }
+
+    @Override
+    public List<Tracker> getTrackers() {
+        return trackerRepository.findByAnimalIdNot(0);
     }
 }

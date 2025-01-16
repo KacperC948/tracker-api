@@ -24,9 +24,15 @@ public class TrackerController {
     ) {
         Tracker tracker = Tracker.builder()
                 .animalId(trackerDto.getAnimalId())
+                .name(trackerDto.getName())
                 .build();
 
         trackerService.addTracker(tracker);
         return ResponseEntity.ok("Tracker added successfully");
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(trackerService.getTrackers());
     }
 }

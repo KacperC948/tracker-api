@@ -52,6 +52,29 @@ public class AnimalController {
         return ResponseEntity.ok("Animal added successfully");
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(
+            @PathVariable long id
+    ) {
+        animalService.deleteAnimal(id);
+        return ResponseEntity.ok("Animal deleted successfully");
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> update(
+            @PathVariable long id,
+            @RequestBody AnimalDto animalDto
+    ) {
+        Animal animal = animalService.getAnimal(id);
+        animal.setName(animalDto.getName());
+        animal.setTempMax(animalDto.getTempMax());
+        animal.setTempMin(animalDto.getTempMin());
+        animal.setType(animalDto.getType());
+
+        animalService.updateAnimal(animal);
+        return ResponseEntity.ok("Animal updated successfully");
+    }
+
     @GetMapping("/getAll")
     public ResponseEntity<Iterable<AnimalWithTrackerAndShepherdPoints>> getAll() {
         List<AnimalWithTrackerAndShepherdPoints> result = new ArrayList<>();
