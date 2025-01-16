@@ -33,4 +33,9 @@ public class AnimalShepherServiceImpl implements AnimalShepherdService{
         }
         return result;
     }
+
+    @Override
+    public void deleteByAnimalType(String type) {
+        animalShepherdRepository.deleteAllByAnimalType(type);
+    }
 }

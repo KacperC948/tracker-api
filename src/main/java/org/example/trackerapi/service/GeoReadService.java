@@ -9,9 +9,11 @@ import java.util.List;
 public interface GeoReadService {
     void save(GeoRead geoRead);
     List<GeoRead> getByTrackerIdAndDateRange(long trackerId, String startDate, String endDate);
+    List<GeoRead> getByDateRange(String startDate, String endDate);
     List<GeoRead> getAllByAnimalIdAndDate(long animalId, LocalDate date);
     double calculateTotalDistance(List<GeoRead> geoReads);
     double calculateAverageTemperature(List<GeoRead> geoReads);
     int countAnimalsInShepherd(List<GeoRead> geoReads);
     Duration calculateIdleTime(List<GeoRead> geoReads);
+    List<GeoRead> getAllWarnings();
 }

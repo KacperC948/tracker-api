@@ -24,18 +24,23 @@ public class AnimalShepherdController {
     public ResponseEntity<String> add(
             @RequestBody List<AnimalShepherdDto> animalShepherdDtos
     ) {
-        List<AnimalShepherd> animalShepherdList = new ArrayList<>();
+        List<AnimalShepherd> animalShepherdToSave = new ArrayList<>();
+        List<AnimalShepherd> animalShepherdsFromDatabase = animalShepherdService.getAllByType(animalShepherdDtos.getFirst().getAnimalType());
+
+        if(!animalShepherdsFromDatabase.isEmpty()) {
+            animalShepherdService.deleteByAnimalType(animalShepherdDtos.getFirst().getAnimalType());
+        }
+
         for (AnimalShepherdDto animalShepherdDto : animalShepherdDtos) {
             AnimalShepherd animalShepherd = AnimalShepherd.builder()
                                 .animalType(animalShepherdDto.getAnimalType())
                                 .latitude(animalShepherdDto.getLatitude())
                                 .longitude(animalShepherdDto.getLongitude())
                                 .build();
-
-            animalShepherdList.add(animalShepherd);
+            animalShepherdToSave.add(animalShepherd);
         }
 
-        animalShepherdService.saveAll(animalShepherdList);
+        animalShepherdService.saveAll(animalShepherdToSave);
         return ResponseEntity.ok("AnimalShepherds added successfully");
     }
 

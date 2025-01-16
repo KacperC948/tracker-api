@@ -5,11 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TrackerDto {
-
-    private long animalId;
+public class AnimalWithTrackerAndShepherdPoints {
+    private AnimalDto animal;
+    private TrackerDto tracker;
+    private List<AnimalShepherdDto> shepherdPoints;
 }

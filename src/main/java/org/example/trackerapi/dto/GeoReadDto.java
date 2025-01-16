@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-//@Getter
-//@Setter
 public class GeoReadDto {
     private long animalId;
     private long trackerId;
@@ -19,6 +17,6 @@ public class GeoReadDto {
     private double currentTemp;
     private boolean isTempExceeded;
     private boolean isAnimalInShepherd;
-    private boolean isTempExceededConfirmed;
-    private boolean isAnimalInShepherdConfirmed;
+    private boolean tempExceededConfirmed;
+    private boolean animalInShepherdConfirmed;
 }

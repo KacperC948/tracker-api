@@ -8,4 +8,5 @@ public interface AnimalShepherdService {
     List<AnimalShepherd> getAllByType(String type);
     AnimalShepherd save(AnimalShepherd animalShepherd);
     List<AnimalShepherd> saveAll(List<AnimalShepherd> animalShepherds);
+    void deleteByAnimalType(String type);
 }

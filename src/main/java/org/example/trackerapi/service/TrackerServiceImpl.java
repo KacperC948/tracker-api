@@ -20,4 +20,9 @@ public class TrackerServiceImpl implements TrackerService{
     public Tracker getTrackerById(long trackerId) {
         return trackerRepository.findTrackerById(trackerId);
     }
+
+    @Override
+    public Tracker getTrackerByAnimalId(long animalId) {
+        return trackerRepository.findTrackerByAnimalId(animalId);
+    }
 }

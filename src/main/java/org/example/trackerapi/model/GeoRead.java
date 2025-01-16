@@ -28,8 +28,7 @@ public class GeoRead {
     private long trackerId;
 
     @Column(name = "created_date")
-    @Builder.Default
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
 
     @Column(name = "longitude")
     private double longitude;
@@ -47,9 +46,9 @@ public class GeoRead {
     private boolean isAnimalInShepherd;
 
     @Column(name = "is_temp_exceeded_confirmed")
-    private boolean isTempExceededConfirmed;
+    private boolean tempExceededConfirmed;
 
     @Column(name = "is_animal_in_shepherd_confirmed")
-    private boolean isAnimalInShepherdConfirmed;
+    private boolean animalInShepherdConfirmed;
 
 }

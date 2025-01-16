@@ -30,10 +30,20 @@ public class GeoReadServiceImpl implements GeoReadService {
     }
 
     @Override
+    public List<GeoRead> getByDateRange(String startDate, String endDate) {
+        return geoReadRepository.findByDateRange(LocalDateTime.parse(startDate), LocalDateTime.parse(endDate));
+    }
+
+    @Override
     public List<GeoRead> getAllByAnimalIdAndDate(long animalId, LocalDate date) {
         LocalDateTime startOfDay = date.atStartOfDay();
         LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
         return geoReadRepository.findAllAnimalIdAndDateRange(animalId, startOfDay, endOfDay);
+    }
+
+    @Override
+    public List<GeoRead> getAllWarnings() {
+        return geoReadRepository.findAllByAnimalInShepherdConfirmedAndTempExceededConfirmed(false, false);
     }
 
     public double calculateTotalDistance(List<GeoRead> geoReads) {
@@ -74,7 +84,6 @@ public class GeoReadServiceImpl implements GeoReadService {
 
         return EARTH_RADIUS_KM * c;
     }
-
 
     public double calculateAverageTemperature(List<GeoRead> geoReads) {
         if (geoReads == null || geoReads.isEmpty()) {

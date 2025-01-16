@@ -44,10 +44,11 @@ public class GeoReadController {
         GeoRead geoRead = GeoRead.builder()
                             .animalId(geoReadDto.getAnimalId())
                             .trackerId(geoReadDto.getTrackerId())
+                            .createdDate(geoReadDto.getCreatedDate())
                             .isTempExceeded(geoReadDto.getCurrentTemp() > animal.getTempMax())
-                            .isTempExceededConfirmed(false)
+                            .tempExceededConfirmed(false)
                             .isAnimalInShepherd(checkAnimalInShepherd(animal.getId(), geoReadDto.getLatitude(), geoReadDto.getLongitude()))
-                            .isAnimalInShepherdConfirmed(false)
+                            .animalInShepherdConfirmed(false)
                             .latitude(geoReadDto.getLatitude())
                             .longitude(geoReadDto.getLongitude())
                             .currentTemp(geoReadDto.getCurrentTemp())
@@ -76,6 +77,11 @@ public class GeoReadController {
         }
         geoReadSummaryService.save(geoReadSummary);
         return ResponseEntity.ok("GeoRead added successfully");
+    }
+
+    @GetMapping("/getAllWarnings")
+    public ResponseEntity<List<GeoRead>> getAllWarnings() {
+        return ResponseEntity.ok(geoReadService.getAllWarnings());
     }
 
     private boolean checkAnimalInShepherd(long animalId, double latitude, double longitude) {
