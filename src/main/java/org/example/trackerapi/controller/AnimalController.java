@@ -100,13 +100,20 @@ public class AnimalController {
                                 .name(animal.getName())
                                 .tempMax(animal.getTempMax())
                                 .tempMin(animal.getTempMin())
-                                .type(animal.getType())
+                                .type(animal.getType().toLowerCase())
                                 .build())
                         .tracker(convertTrackerToDto(trackerService.getTrackerByAnimalId(animal.getId())))
                         .shepherdPoints(convertAnimalShepherdsToDto(animalShepherdService.getAllByType(animal.getType())))
                         .build());
         });
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/getAll/{animalType}")
+    public ResponseEntity<Iterable<Animal>> getAllByType(
+            @PathVariable String animalType
+    ) {
+        return ResponseEntity.ok(animalService.getAllAnimalsByType(animalType));
     }
 
     private TrackerDto convertTrackerToDto(Tracker tracker) {

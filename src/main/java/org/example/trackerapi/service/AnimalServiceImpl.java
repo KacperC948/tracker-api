@@ -26,8 +26,8 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public Animal updateAnimal(Animal animal) {
-        return animalRepository.save(animal);
+    public void updateAnimal(Animal animal) {
+        animalRepository.save(animal);
     }
 
     @Override
@@ -38,6 +38,11 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public List<Animal> getAnimals() {
         return animalRepository.findAll();
+    }
+
+    @Override
+    public List<Animal> getAllAnimalsByType(String type) {
+        return animalRepository.findAllByType(type);
     }
 
     @Override
