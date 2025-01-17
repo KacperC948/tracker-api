@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.trackerapi.utils.LocalDateAttributeConverter;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 @Data
@@ -40,7 +39,7 @@ public class GeoReadSummary {
     private int outOfShepherdCounter;
 
     @Column(name = "idle_time")
-    private Duration idleTime;
+    private long idleTime;
 
     @Column(name = "animal_type")
     private String animalType;

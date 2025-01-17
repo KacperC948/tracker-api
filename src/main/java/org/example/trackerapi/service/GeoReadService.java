@@ -2,7 +2,6 @@ package org.example.trackerapi.service;
 
 import org.example.trackerapi.model.GeoRead;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +15,7 @@ public interface GeoReadService {
     double calculateTotalDistance(List<GeoRead> geoReads);
     double calculateAverageTemperature(List<GeoRead> geoReads);
     int countAnimalsInShepherd(List<GeoRead> geoReads);
-    Duration calculateIdleTime(List<GeoRead> geoReads);
+    long calculateIdleTime(List<GeoRead> geoReads);
     List<GeoRead> getAllWarnings();
     GeoRead findGeoReadById(long id);
 }

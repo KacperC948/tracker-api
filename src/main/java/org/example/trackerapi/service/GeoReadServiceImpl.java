@@ -120,9 +120,9 @@ public class GeoReadServiceImpl implements GeoReadService {
                 .count();
     }
 
-    public Duration calculateIdleTime(List<GeoRead> geoReads) {
+    public long calculateIdleTime(List<GeoRead> geoReads) {
         if (geoReads == null || geoReads.size() < 2) {
-            return Duration.ZERO;
+            return 0;
         }
 
         Duration duration = Duration.ZERO;
@@ -138,6 +138,6 @@ public class GeoReadServiceImpl implements GeoReadService {
             }
         }
 
-        return duration;
+        return duration.getSeconds();
     }
 }
