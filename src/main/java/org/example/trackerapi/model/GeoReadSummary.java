@@ -41,4 +41,7 @@ public class GeoReadSummary {
 
     @Column(name = "idle_time")
     private Duration idleTime;
+
+    @Column(name = "animal_type")
+    private String animalType;
 }

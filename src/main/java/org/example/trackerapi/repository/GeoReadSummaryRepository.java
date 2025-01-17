@@ -12,5 +12,9 @@ public interface GeoReadSummaryRepository extends JpaRepository<GeoReadSummary, 
     GeoReadSummary findGeoReadSummaryById(long id);
     @Query("SELECT g FROM GeoReadSummary g WHERE g.date BETWEEN :startDate AND :endDate")
     List<GeoReadSummary> findByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    @Query("SELECT g FROM GeoReadSummary g WHERE g.animalType = :animalType AND g.date BETWEEN :startDate AND :endDate")
+    List<GeoReadSummary> findByDateRangeAndAnimalType(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, String animalType);
+    @Query("SELECT g FROM GeoReadSummary g WHERE g.animalId = :animalId AND g.date BETWEEN :startDate AND :endDate")
+    List<GeoReadSummary> findByDateRangeAndAnimalId(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, long animalId);
     GeoReadSummary findGeoReadSummaryByDateAndAnimalId(LocalDate date, long animalId);
 }

@@ -11,6 +11,7 @@ public interface GeoReadService {
     void save(GeoRead geoRead);
     List<GeoRead> getByTrackerIdAndDateRange(long trackerId, String startDate, String endDate);
     List<GeoRead> getByDateRange(LocalDateTime startDate, LocalDateTime endDate);
+    List<GeoRead> getAllByDateRangeAndAnimalId(LocalDateTime startDate, LocalDateTime endDate, long animalId);
     List<GeoRead> getAllByAnimalIdAndDate(long animalId, LocalDate date);
     double calculateTotalDistance(List<GeoRead> geoReads);
     double calculateAverageTemperature(List<GeoRead> geoReads);

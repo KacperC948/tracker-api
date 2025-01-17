@@ -6,6 +6,7 @@ import org.example.trackerapi.model.Animal;
 import org.example.trackerapi.model.AnimalShepherd;
 import org.example.trackerapi.model.GeoRead;
 import org.example.trackerapi.model.GeoReadSummary;
+import org.example.trackerapi.requestBody.GetGeoReadsForAnimalIdBody;
 import org.example.trackerapi.requestBody.GetGeoReadsRequest;
 import org.example.trackerapi.service.AnimalService;
 import org.example.trackerapi.service.AnimalShepherdService;
@@ -72,6 +73,7 @@ public class GeoReadController {
                                 .tempAvg(geoReadService.calculateAverageTemperature(geoReads))
                                 .outOfShepherdCounter(geoReadService.countAnimalsInShepherd(geoReads))
                                 .idleTime(geoReadService.calculateIdleTime(geoReads))
+                                .animalType(animal.getType())
                                 .build();
         } else {
             geoReadSummary.setDistance(geoReadService.calculateTotalDistance(geoReads));
@@ -88,6 +90,17 @@ public class GeoReadController {
             @RequestBody GetGeoReadsRequest getGeoReadsRequest
     ) {
         return ResponseEntity.ok(geoReadService.getByDateRange(getGeoReadsRequest.getStartDate(), getGeoReadsRequest.getEndDate()));
+    }
+
+    @PostMapping("/getAllForAnimalId")
+    public ResponseEntity<List<GeoRead>> getAllByDataRange(
+            @RequestBody GetGeoReadsForAnimalIdBody getGeoReadsForAnimalIdBody
+    ) {
+        return ResponseEntity.ok(
+                geoReadService.getAllByDateRangeAndAnimalId(
+                        getGeoReadsForAnimalIdBody.getStartDate(),
+                        getGeoReadsForAnimalIdBody.getEndDate(),
+                        getGeoReadsForAnimalIdBody.getAnimalId()));
     }
 
     @GetMapping("/getAllWarnings")

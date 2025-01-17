@@ -28,4 +28,14 @@ public class GeoReadSummaryServiceImpl implements GeoReadSummaryService {
     public List<GeoReadSummary> getByDateRange(LocalDate startDate, LocalDate endDate) {
         return geoReadSummaryRepository.findByDateRange(startDate, endDate);
     }
+
+    @Override
+    public List<GeoReadSummary> getByDateRangeAndAnimalType(LocalDate startDate, LocalDate endDate, String animalType) {
+        return geoReadSummaryRepository.findByDateRangeAndAnimalType(startDate, endDate, animalType);
+    }
+
+    @Override
+    public List<GeoReadSummary> getByDateRangeAndAnimalId(LocalDate startDate, LocalDate endDate, long animalId) {
+        return geoReadSummaryRepository.findByDateRangeAndAnimalId(startDate, endDate, animalId);
+    }
 }

@@ -36,6 +36,11 @@ public class GeoReadServiceImpl implements GeoReadService {
     }
 
     @Override
+    public List<GeoRead> getAllByDateRangeAndAnimalId(LocalDateTime startDate, LocalDateTime endDate, long animalId) {
+        return geoReadRepository.findAllAnimalIdAndDateRange(animalId, startDate, endDate);
+    }
+
+    @Override
     public List<GeoRead> getAllByAnimalIdAndDate(long animalId, LocalDate date) {
         LocalDateTime startOfDay = date.atStartOfDay();
         LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
