@@ -28,6 +28,9 @@ public class GeoReadSummaryController {
 
     @PostMapping("/getSummaryByAnimalType")
     public List<GeoReadSummary> getSummaryByType(@RequestBody GetSummaryByTypeBody getSummaryByTypeBody) {
+        List<GeoReadSummary> summaries = geoReadSummaryService.getByDateRangeAndAnimalType(getSummaryByTypeBody.getStartDate(),
+                getSummaryByTypeBody.getEndDate(), getSummaryByTypeBody.getAnimalType());
+
         return geoReadSummaryService.getByDateRangeAndAnimalType(getSummaryByTypeBody.getStartDate(),
                 getSummaryByTypeBody.getEndDate(), getSummaryByTypeBody.getAnimalType());
     }
