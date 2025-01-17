@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnimalDto {
+    private long id;
     private String name;
     private double tempMax;
     private double tempMin;

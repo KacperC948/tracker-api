@@ -86,6 +86,7 @@ public class AnimalController {
                                 .tempMax(animal.getTempMax())
                                 .tempMin(animal.getTempMin())
                                 .type(animal.getType())
+                                .id(animal.getId())
                                 .build())
                         .tracker(convertTrackerToDto(trackerService.getTrackerByAnimalId(animal.getId())))
                         .shepherdPoints(convertAnimalShepherdsToDto(animalShepherdService.getAllByType(animal.getType())))
@@ -95,6 +96,8 @@ public class AnimalController {
     }
 
     private TrackerDto convertTrackerToDto(Tracker tracker) {
+        if (tracker == null)
+            return TrackerDto.builder().animalId(0).name("").id(0).build();
         return modelMapper.map(tracker, TrackerDto.class);
     }
 

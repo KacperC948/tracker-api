@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TrackerDto {
-
+    private long id;
     private long animalId;
     private String name;
 }

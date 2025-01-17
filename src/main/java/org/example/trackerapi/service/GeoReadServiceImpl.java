@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class GeoReadServiceImpl implements GeoReadService {
@@ -110,7 +111,7 @@ public class GeoReadServiceImpl implements GeoReadService {
         }
 
         return (int) geoReads.stream()
-                .filter(GeoRead::isAnimalInShepherd)
+                .filter(Predicate.not(GeoRead::isAnimalInShepherd))
                 .count();
     }
 

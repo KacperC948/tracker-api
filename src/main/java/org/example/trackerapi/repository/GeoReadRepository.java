@@ -14,7 +14,7 @@ public interface GeoReadRepository extends JpaRepository<GeoRead, Long> {
     List<GeoRead> findByTrackerIdAndDateRange(@Param("trackerId") long trackerId, @Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
     @Query("SELECT g FROM GeoRead g WHERE g.createdDate BETWEEN :startDate AND :endDate")
     List<GeoRead> findByDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
-    @Query("SELECT g FROM GeoRead g WHERE g.animalId = :trackerId AND g.createdDate BETWEEN :startDate AND :endDate")
+    @Query("SELECT g FROM GeoRead g WHERE g.animalId = :animalId AND g.createdDate BETWEEN :startDate AND :endDate")
     List<GeoRead> findAllAnimalIdAndDateRange(@Param("animalId") long animalId, @Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
     List<GeoRead> findAllByAnimalInShepherdConfirmedAndTempExceededConfirmed(boolean isTempConfirmed, boolean isAnimalInShepherdConfirmed);
 }

@@ -49,7 +49,7 @@ public class GeoReadController {
                             .animalId(geoReadDto.getAnimalId())
                             .trackerId(geoReadDto.getTrackerId())
                             .createdDate(geoReadDto.getCreatedDate())
-                            .isTempExceeded(geoReadDto.getCurrentTemp() > animal.getTempMax())
+                            .isTempExceeded(geoReadDto.getCurrentTemp() > animal.getTempMax() ||  geoReadDto.getCurrentTemp()  < animal.getTempMin() )
                             .tempExceededConfirmed(false)
                             .isAnimalInShepherd(checkAnimalInShepherd(animal.getId(), geoReadDto.getLatitude(), geoReadDto.getLongitude()))
                             .animalInShepherdConfirmed(false)
@@ -61,7 +61,7 @@ public class GeoReadController {
         geoReadService.save(geoRead);
 
         List<GeoRead> geoReads = geoReadService.getAllByAnimalIdAndDate(geoRead.getAnimalId(), geoRead.getCreatedDate().toLocalDate());
-        geoReads.add(geoRead);
+
 
         GeoReadSummary geoReadSummary = geoReadSummaryService.getByDateAndAnimalId(geoRead.getCreatedDate().toLocalDate(), geoRead.getAnimalId());
         if(geoReadSummary == null) {
@@ -83,7 +83,7 @@ public class GeoReadController {
         return ResponseEntity.ok("GeoRead added successfully");
     }
 
-    @GetMapping("/getAll")
+    @PostMapping("/getAll")
     public ResponseEntity<List<GeoRead>> getAllByDataRange(
             @RequestBody GetGeoReadsRequest getGeoReadsRequest
     ) {
@@ -117,7 +117,8 @@ public class GeoReadController {
 
     public static boolean isPointInRegion(List<AnimalShepherd> regionPoints, double latitude, double longitude) {
         if (regionPoints == null || regionPoints.size() < 3) {
-            throw new IllegalArgumentException("Region must be defined by at least 3 points");
+            //throw new IllegalArgumentException("Region must be defined by at least 3 points");
+            return true;
         }
 
         Path2D.Double polygon = new Path2D.Double();
